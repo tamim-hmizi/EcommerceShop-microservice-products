@@ -1,4 +1,5 @@
 import Product from '../models/Product.js';
+import '../models/Category.js';
 
 const createProduct = async (req, res) => {
   try {
@@ -38,12 +39,12 @@ const updateProduct = async (req, res) => {
     const { name, description, price, stock, category, image } = req.body;
     const product = await Product.findById(req.params.id);
     if (product) {
-      product.name = name || product.name;
-      product.description = description || product.description;
-      product.price = price || product.price;
-      product.stock = stock || product.stock;
-      product.category = category || product.category;
-      product.image = image || product.image;
+      product.name = name ?? product.name;
+      product.description = description ?? product.description;
+      product.price = price ?? product.price;
+      product.stock = stock ?? product.stock;
+      product.category = category ?? product.category;
+      product.image = image ?? product.image;
       await product.save();
       res.json(product);
     } else {
