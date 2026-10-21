@@ -5,7 +5,6 @@ import request from 'supertest';
 import app from '../src/app.js';
 import { useDatabase } from './helpers.js';
 
-useDatabase();
 
 const base = '/api/products';
 const product = () => ({
@@ -17,6 +16,8 @@ const product = () => ({
 });
 
 describe('products service', () => {
+  useDatabase();
+
   it('creates, reads, updates and deletes a product', async () => {
     const created = await request(app).post(base).send(product()).expect(201);
     const id = created.body._id;
